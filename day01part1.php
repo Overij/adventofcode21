@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @link https://adventofcode.com/2021/day/1
+ */
+
 $inputs = file('input/d1.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 $prev = 0;
 $count = 0;

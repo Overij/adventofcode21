@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @link https://adventofcode.com/2021/day/3
+ */
+
 $inputs = file('input/d3.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 function reduce(array $array, int $criteria) : int

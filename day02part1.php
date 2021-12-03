@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @link https://adventofcode.com/2021/day/2
+ */
+
 $inputs = file('input/d2.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 $pos = $depth = 0;
