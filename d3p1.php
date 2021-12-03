@@ -6,10 +6,7 @@ $bitsByPos = [];
 
 for ($i = 0; $i < strlen($inputs[0]); $i++)
 {
-    $bitsByPos[] = array_map(function($row) use ($i)
-    {
-        return $row[$i];
-    }, $inputs);
+    $bitsByPos[] = array_map(fn($row) => $row[$i], $inputs);
 }
 
 $gamma = implode('', array_map(function ($bits)
