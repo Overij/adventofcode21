@@ -42,8 +42,7 @@ class Board
             if (count(array_filter($this->numbers[$i], fn(BingoNum $num) => $num->isMarked)) == 5 ||
                 count(array_filter(array_column($this->numbers, $i), fn(BingoNum $num) => $num->isMarked)) == 5)
             {
-                $this->bingo = true;
-                return true;
+                return $this->bingo = true;
             }
         }
         return false;
@@ -52,9 +51,9 @@ class Board
     public function sum() : int
     {
         $sum = 0;
+        /** @var BingoNum $num */
         foreach (new RecursiveIteratorIterator(new RecursiveArrayIterator($this->numbers, RecursiveArrayIterator::CHILD_ARRAYS_ONLY)) as $num)
         {
-            /** @var BingoNum $num */
             if (!$num->isMarked)
             {
                 $sum += $num->value;
@@ -72,6 +71,7 @@ class Board
 $inputs = file('input/d4.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 $drawnNumbers = explode(',', array_shift($inputs));
+/** @var Board[] */
 $boards = [];
 
 foreach (array_chunk($inputs, 5) as $chunk)
@@ -89,13 +89,16 @@ foreach ($drawnNumbers as $drawnNum)
 {
     foreach ($boards as $board)
     {
-        /** @var Board $board */
-        $board->mark((int) $drawnNum);
-        if (!$board->hadBingo() && $board->check())
+        if (!$board->hadBingo())
         {
-            $scores[] = $drawnNum * $board->sum();
+            $board->mark((int) $drawnNum);
+            if ($board->check())
+            {
+                $scores[] = $drawnNum * $board->sum();
+            }
         }
     }
 }
 
-echo $scores[count($scores) - 1] . \PHP_EOL;
+echo 'First bingo score: ' . $scores[0] . \PHP_EOL;
+echo 'Last bingo score: ' . $scores[count($scores) - 1] . \PHP_EOL;
