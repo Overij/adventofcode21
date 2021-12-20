@@ -8,11 +8,11 @@ $inputs = file('input/d10.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 $pairs = [ ')' => '(', ']' => '[', '}' => '{', '>' => '<' ];
 $opening = array_values($pairs);
-$stack = new SplStack();
 $errors = array_fill_keys(array_keys($pairs), 0);
 
 foreach ($inputs as $line)
 {
+    $stack = new SplStack();
     foreach (str_split($line) as $char)
     {
         if (in_array($char, $opening))
